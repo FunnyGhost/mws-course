@@ -43,7 +43,10 @@ const plugins = [
 
 const restaurantPlugins = [
   new ExtractTextPlugin({ filename: "[name].css", allChunks: true }),
-  new HtmlWebpackPlugin({ template: "./restaurant.html" }),
+  new HtmlWebpackPlugin({
+    filename: "restaurant.html",
+    template: "./restaurant.html"
+  }),
   new ScriptExtHtmlWebpackPlugin({
     module: /\.mjs$/,
     custom: [
