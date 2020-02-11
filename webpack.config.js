@@ -7,10 +7,7 @@ const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const entry = {
-  main: "./js/main.es6.js"
-};
-
-const restaurantEntry = {
+  main: "./js/main.es6.js",
   restaurant: "./js/restaurant_info.es6.js"
 };
 
@@ -25,6 +22,10 @@ const cssRule = {
 const plugins = [
   new ExtractTextPlugin({ filename: "[name].css", allChunks: true }),
   new HtmlWebpackPlugin({ template: "./index.html" }),
+  new HtmlWebpackPlugin({
+    filename: "restaurant.html",
+    template: "./restaurant.html"
+  }),
   new ScriptExtHtmlWebpackPlugin({
     module: /\.mjs$/,
     custom: [
@@ -39,24 +40,6 @@ const plugins = [
     { from: "./data", to: "data" },
     { from: "./img", to: "img" }
   ])
-];
-
-const restaurantPlugins = [
-  new ExtractTextPlugin({ filename: "[name].css", allChunks: true }),
-  new HtmlWebpackPlugin({
-    filename: "restaurant.html",
-    template: "./restaurant.html"
-  }),
-  new ScriptExtHtmlWebpackPlugin({
-    module: /\.mjs$/,
-    custom: [
-      {
-        test: /\.js$/,
-        attribute: "nomodule",
-        value: ""
-      }
-    ]
-  })
 ];
 
 const legacyConfig = {
@@ -123,73 +106,4 @@ const moduleConfig = {
   plugins
 };
 
-const restaurantsLegacyConfig = {
-  entry: restaurantEntry,
-  output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].bundle.js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        options: {
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                useBuiltIns: "usage",
-                targets: {
-                  esmodules: false
-                }
-              }
-            ]
-          ]
-        }
-      },
-      cssRule
-    ]
-  },
-  plugins: restaurantPlugins
-};
-
-const restaurantsModuleConfig = {
-  entry: restaurantEntry,
-  output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].mjs"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        options: {
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                useBuiltIns: "usage",
-                targets: {
-                  esmodules: true
-                }
-              }
-            ]
-          ]
-        }
-      },
-      cssRule
-    ]
-  },
-  plugins: restaurantPlugins
-};
-
-module.exports = [
-  legacyConfig,
-  moduleConfig,
-  restaurantsLegacyConfig,
-  restaurantsModuleConfig
-];
+module.exports = [legacyConfig, moduleConfig];
