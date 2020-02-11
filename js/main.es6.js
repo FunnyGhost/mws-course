@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initMap(); // added
   fetchNeighborhoods();
   fetchCuisines();
+
+  const neighborhoodsSelect = document.querySelector("#neighborhoods-select");
+  neighborhoodsSelect.addEventListener("change", updateRestaurants);
+
+  const cuisineSelects = document.querySelector("#cuisines-select");
+  cuisineSelects.addEventListener("change", updateRestaurants);
 });
 
 /**
@@ -102,6 +108,7 @@ const initMap = () => {
  * Update page and map for current restaurants.
  */
 const updateRestaurants = () => {
+  console.log("update restaurants");
   const cSelect = document.getElementById("cuisines-select");
   const nSelect = document.getElementById("neighborhoods-select");
 
