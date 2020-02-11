@@ -1,0 +1,33 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "serve-modern-code",
+  "version": "1.0.0",
+  "description": "An example of how serving modern code can trim bundle sizes",
+  "scripts": {
+    "start": "webpack && http-server -p 8000"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.2",
+    "copy-webpack-plugin": "5.1.1",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "script-ext-html-webpack-plugin": "^2.0.1",
+    "style-loader": "^0.16.1",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "engines": {
+    "node": "8.11.2"
+  },
+  "license": "MIT"
+}
