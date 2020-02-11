@@ -1,7 +1,7 @@
 /**
  * Common database helper functions.
  */
-class DBHelper {
+export class DBHelper {
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -25,7 +25,7 @@ class DBHelper {
         callback(null, restaurants);
       } else {
         // Oops!. Got an error from server.
-        var error = `Request failed. Returned status of ${xhr.status}`;
+        const error = `Request failed. Returned status of ${xhr.status}`;
         callback(error, null);
       }
     };

@@ -1,3 +1,6 @@
+import "../css/styles.css";
+import { DBHelper } from "./dbhelper.es6";
+
 let restaurant, newMap;
 
 /**
@@ -10,7 +13,7 @@ document.addEventListener("DOMContentLoaded", event => {
 /**
  * Initialize leafvar map
  */
-initMap = () => {
+const initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) {
       // Got an error!
@@ -42,7 +45,7 @@ initMap = () => {
 /**
  * Get current restaurant from page URL.
  */
-fetchRestaurantFromURL = callback => {
+const fetchRestaurantFromURL = callback => {
   if (self.restaurant) {
     // restaurant already fetched!
     callback(null, self.restaurant);
@@ -51,7 +54,7 @@ fetchRestaurantFromURL = callback => {
   const id = getParameterByName("id");
   if (!id) {
     // no id found in URL
-    error = "No restaurant id in URL";
+    const error = "No restaurant id in URL";
     callback(error, null);
   } else {
     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
@@ -69,7 +72,7 @@ fetchRestaurantFromURL = callback => {
 /**
  * Create restaurant HTML and add it to the webpage
  */
-fillRestaurantHTML = restaurant => {
+const fillRestaurantHTML = restaurant => {
   if (restaurant == null) {
     restaurant = self.restaurant;
   }
@@ -97,7 +100,7 @@ fillRestaurantHTML = restaurant => {
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
-fillRestaurantHoursHTML = operatingHours => {
+const fillRestaurantHoursHTML = operatingHours => {
   if (operatingHours == null) {
     operatingHours = self.restaurant.operating_hours;
   }
@@ -120,7 +123,7 @@ fillRestaurantHoursHTML = operatingHours => {
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = reviews => {
+const fillReviewsHTML = reviews => {
   if (reviews == null) {
     reviews = self.restaurant.reviews;
   }
@@ -145,7 +148,7 @@ fillReviewsHTML = reviews => {
 /**
  * Create review HTML and add it to the webpage.
  */
-createReviewHTML = review => {
+const createReviewHTML = review => {
   const li = document.createElement("li");
   const name = document.createElement("p");
   name.innerHTML = review.name;
@@ -169,7 +172,7 @@ createReviewHTML = review => {
 /**
  * Add restaurant name to the breadcrumb navigation menu
  */
-fillBreadcrumb = restaurant => {
+const fillBreadcrumb = restaurant => {
   if (restaurant == null) {
     restaurant = self.restaurant;
   }
@@ -182,7 +185,7 @@ fillBreadcrumb = restaurant => {
 /**
  * Get a parameter by name from page URL.
  */
-getParameterByName = (name, url) => {
+const getParameterByName = (name, url) => {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
   const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
